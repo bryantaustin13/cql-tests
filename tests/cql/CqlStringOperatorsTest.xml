@@ -390,7 +390,6 @@
 		</test>
 		<test name="SubstringAB0To1" version="1.0">
 			<capability code="string-operators" />
->>>>>>> main
 			<expression>Substring('ab', 0, 1)</expression>
 			<output>'a'</output>
 		</test>
