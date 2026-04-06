@@ -383,7 +383,6 @@
 			<expression>Substring('ab', -1)</expression>
 			<output>null</output>
 		</test>
-<<<<<<< main
 		<test name="SubstringEmptyAnd0">
 			<expression>Substring('', 0)</expression>
 			<output>''</output>
