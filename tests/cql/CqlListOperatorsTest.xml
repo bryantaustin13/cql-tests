@@ -99,7 +99,7 @@
 		</test>
 		<test name="ContainsNullLeft" version="1.0">
 			<capability code="list-operators" />
-			<expression>null contains 'a'</expression>
+			<expression>null as List&lt;String&gt; contains 'a'</expression>
 			<output>false</output>
 		</test>
 	</group>
@@ -389,7 +389,7 @@
 		</test>
 		<test name="In1Null" version="1.0">
 			<capability code="list-operators" />
-			<expression>1 in null</expression>
+			<expression>1 in null as List&lt;Integer&gt;</expression>
 			<output>false</output>
 		</test>
 		<test name="In1And12" version="1.0">
@@ -472,7 +472,7 @@
 		</test>
 		<test name="IncludesNullLeft" version="1.0">
 			<capability code="list-operators" />
-			<expression>null includes {2}</expression>
+			<expression>null as List&lt;Integer&gt; includes {2}</expression>
 			<output>null</output>
 		</test>
 		<!-- this test is going to the ContainsEvaluator -->
@@ -537,7 +537,7 @@
 		</test>
 		<test name="IncludedInNullRight" version="1.0">
 			<capability code="list-operators" />
-			<expression>{'s', 'a', 'm'} included in null</expression>
+			<expression>{'s', 'a', 'm'} included in null as List&lt;String&gt;</expression>
 			<output>null</output>
 		</test>
 	</group>
