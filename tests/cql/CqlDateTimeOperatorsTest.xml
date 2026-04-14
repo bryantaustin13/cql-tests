@@ -565,15 +565,15 @@
 			<expression>millisecond from DateTime(2003, 10, 29, 20, 50, 33, 955)</expression>
 			<output>955</output>
 		</test>
-		<test name="DateTimeComponentFromTimezone" version="1.4">
+		<test name="DateTimeComponentFromTimezoneOffset" version="1.4">
 			<capability code="component-extraction"/>
 			<capability code="timezone-offset"/>
 			<expression>timezoneoffset from DateTime(2003, 10, 29, 20, 50, 33, 955, 1)</expression>
 			<output>1.00</output>
 		</test>
-		<test name="DateTimeComponentFromTimezoneOffset" versionTo="1.3">
-		  	<capability code="component-extraction"/>
-		  	<capability code="timezone-offset"/>
+		<test name="DateTimeComponentFromTimezone" versionTo="1.3">
+			<capability code="component-extraction"/>
+			<capability code="timezone-offset"/>
 			<expression>timezone from DateTime(2003, 10, 29, 20, 50, 33, 955, 1)</expression>
 			<output>1.00</output>
 			<!-- EXPECTED: Timezone keyword is only valid in 1.3 or lower -->
