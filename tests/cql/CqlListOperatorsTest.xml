@@ -194,7 +194,8 @@
 		</test>
 		<test name="EqualABCAnd123" version="1.0">
 			<capability code="list-operators" />
-			<expression>{ 'a', 'b', 'c' } as List&lt;Any&gt; ~ { 1, 2, 3 } as List&lt;Any&gt;</expression>
+			<!-- corrected: was using ~ (equivalent) inside the Equal group -->
+			<expression>{ 'a', 'b', 'c' } as List&lt;Any&gt; = { 1, 2, 3 } as List&lt;Any&gt;</expression>
 			<output>false</output>
 		</test>
 		<test name="Equal123AndABC" version="1.0">
@@ -275,6 +276,12 @@
 			<expression>{ 1, 4 } except null</expression>
 			<output>{1, 4}</output>
 		</test>
+		<test name="ExceptNullLeft" version="1.0">
+			<capability code="list-operators" />
+			<!-- first argument null -> null -->
+			<expression>(null as List&lt;Integer&gt;) except { 1, 3, 5 }</expression>
+			<output>null</output>
+		</test>
 	</group>
 	<group name="Exists" version="1.0">
 		<capability code="list-operators" />
@@ -341,6 +348,11 @@
 			<expression>Flatten({ {@T15:59:59.999}, {@T20:59:59.999} })</expression>
 			<output>{ @T15:59:59.999, @T20:59:59.999 }</output>
 		</test>
+		<test name="FlattenNull" version="1.0">
+			<capability code="list-operators" />
+			<expression>Flatten(null as List&lt;List&lt;Integer&gt;&gt;)</expression>
+			<output>null</output>
+		</test>
 	</group>
 	<group name="First" version="1.0">
 		<capability code="list-operators" />
@@ -373,6 +385,11 @@
 			<capability code="list-operators" />
 			<expression>First({ @T15:59:59.999, @T20:59:59.999 })</expression>
 			<output>@T15:59:59.999</output>
+		</test>
+		<test name="FirstNull" version="1.0">
+			<capability code="list-operators" />
+			<expression>First(null as List&lt;Integer&gt;)</expression>
+			<output>null</output>
 		</test>
 	</group>
 	<group name="In" version="1.0">
@@ -648,6 +665,12 @@
 			<expression>{ @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } intersect { @T01:29:15.156, @T15:59:59.999, @T20:59:59.999 }</expression>
 			<output>{@T15:59:59.999, @T20:59:59.999}</output>
 		</test>
+		<test name="IntersectNull" version="1.0">
+			<capability code="list-operators" />
+			<!-- either argument null -> null -->
+			<expression>{ 1, 3, 5 } intersect (null as List&lt;Integer&gt;)</expression>
+			<output>null</output>
+		</test>
 	</group>
 	<group name="Last" version="1.0">
 		<capability code="list-operators" />
@@ -833,12 +856,13 @@
 		</test>
 		<test name="NotEqualTimeTrue" version="1.0">
 			<capability code="list-operators" />
-			<expression>{ @T15:59:59.999, @T20:59:59.999 } = { @T15:59:59.999, @T20:59:59.999 }</expression>
+			<!-- corrected: was using = instead of != -->
+			<expression>{ @T15:59:59.999, @T20:59:59.999 } != { @T15:59:59.999, @T20:59:49.999 }</expression>
 			<output>true</output>
 		</test>
 		<test name="NotEqualTimeFalse" version="1.0">
 			<capability code="list-operators" />
-			<expression>{ @T15:59:59.999, @T20:59:59.999 } = { @T15:59:59.999, @T20:59:49.999 }</expression>
+			<expression>{ @T15:59:59.999, @T20:59:59.999 } != { @T15:59:59.999, @T20:59:59.999 }</expression>
 			<output>false</output>
 		</test>
 	</group>
@@ -1126,6 +1150,11 @@
 			<expression>singleton from { @T15:59:59.999 }</expression>
 			<output>@T15:59:59.999</output>
 		</test>
+		<test name="SingletonFromNull" version="1.0">
+			<capability code="list-operators" />
+			<expression>singleton from (null as List&lt;Integer&gt;)</expression>
+			<output>null</output>
+		</test>
 	</group>
 	<group name="Skip" version="1.0">
 		<capability code="list-operators" />
@@ -1153,6 +1182,18 @@
 			<capability code="list-operators" />
 			<expression>Skip({1,2,3,4,5}, 5)</expression>
 			<output>{}</output>
+		</test>
+		<test name="SkipNullNumber" version="1.0">
+			<capability code="list-operators" />
+			<!-- null number -> entire list -->
+			<expression>Skip({ 1, 2, 3 }, null as Integer)</expression>
+			<output>{ 1, 2, 3 }</output>
+		</test>
+		<test name="SkipNegative" version="1.0">
+			<capability code="list-operators" />
+			<!-- negative number -> empty list -->
+			<expression>Skip({ 1, 2, 3 }, -1)</expression>
+			<output>{ }</output>
 		</test>
 	</group>
 	<group name="Slice" version="2.0" reference="http://cql.hl7.org/09-b-cqlreference.html#slice">
